@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Mega Spin & Win - Diwali Dhamaka 2026</title>
+  <meta name="description" content="Spin the lucky wheel to win mega grand prizes including iPhone 18 Pro Max, Rs. 50,000 cash, gift vouchers, and instant rewards!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Ambient Background Sparkles & Glows -->
+  <div class="ambient-glow glow-top"></div>
+  <div class="ambient-glow glow-bottom"></div>
+  <canvas id="ambient-canvas" class="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- Navigation Header (Responsive & Accessible) -->
+  <nav class="site-nav" aria-label="Main Navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-brand-logo">🪔</span>
+        <span class="nav-brand-text">Diwali Dhamaka</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html#wheel-section" class="nav-link active">Lucky Wheel</a></li>
+        <li><a href="index.html#reviews" class="nav-link">Winner Reviews</a></li>
+        <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
+        <li><a href="index.html#upcoming-games" class="nav-link">New Year Games</a></li>
+        <li><a href="about-us.html" class="nav-link">About Us</a></li>
+        <li><a href="contact-us.html" class="nav-link">Contact Us</a></li>
+        <li><a href="index.html#wheel-section" class="nav-link nav-highlight-btn">⚡ Play Free</a></li>
+      </ul>
+
+      <button type="button" class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        ☰
+      </button>
+    </div>
+
+    <!-- Collapsible Mobile Drawer -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html#wheel-section">🎯 Lucky Wheel</a></li>
+        <li><a href="index.html#reviews">⭐ Winner Reviews (Amazon Proof)</a></li>
+        <li><a href="index.html#faq">❓ Contest Rules &amp; FAQ</a></li>
+        <li><a href="index.html#upcoming-games">🎆 New Year 2027 Games</a></li>
+        <li><a href="about-us.html">👥 About Us &amp; Organization</a></li>
+        <li><a href="contact-us.html">📬 Contact Us &amp; Support</a></li>
+        <li><a href="privacy-policy.html">🔒 Privacy Policy</a></li>
+        <li><a href="terms.html">📜 Terms of Service</a></li>
+        <li><a href="disclaimer.html">⚠️ Legal Disclaimer</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <header class="site-header">
+    <div class="header-container">
+      <h1 class="main-title">
+        <span class="title-sub">DIWALI DHAMAKA</span>
+        <span class="title-main">SPIN &amp; WIN</span>
+      </h1>
+      <p class="subtitle">Spin &amp; win Grand Prizes up to <strong class="highlight-gold">iPhone 18 Pro Max</strong> &amp; <strong class="highlight-gold">₹50,000 Cash</strong>!</p>
+      
+      <!-- Top Action Bar (Spins Left only) -->
+      <div class="top-stats-bar">
+        <div class="stat-pill" id="spins-pill">
+          <span class="stat-icon">🎯</span>
+          <span class="stat-label">Spins Left:</span>
+          <span class="stat-val" id="spins-count">1</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Game Stage -->
+  <main class="game-container">
+    <div class="game-layout">
+
+      <!-- Centered Wheel Section -->
+      <section class="wheel-section" id="wheel-section" aria-label="Lucky Spin Wheel">
+        <div class="wheel-stage">
+          <!-- Outer Golden Glow Ring with Bulbs -->
+          <div class="wheel-border-rim" id="wheel-rim">
+            <!-- Dynamic 24 LED light bulbs injected via JS -->
+            <div class="lights-container" id="lights-container" aria-hidden="true"></div>
+            
+            <!-- Needle / Ticker at 12 O'Clock -->
+            <div class="wheel-ticker" id="wheel-ticker" aria-hidden="true">
+              <svg viewBox="0 0 40 50" class="ticker-svg">
+                <defs>
+                  <linearGradient id="ticker-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#fff6cc" />
+                    <stop offset="50%" stop-color="#ffd700" />
+                    <stop offset="100%" stop-color="#b8860b" />
+                  </linearGradient>
+                  <filter id="ticker-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="rgba(0,0,0,0.6)" />
+                  </filter>
+                </defs>
+                <polygon points="20,48 5,6 35,6" fill="url(#ticker-grad)" filter="url(#ticker-shadow)" stroke="#fff" stroke-width="1.5" />
+                <circle cx="20" cy="14" r="6" fill="#fff" />
+                <circle cx="20" cy="14" r="3.5" fill="#d97706" />
+              </svg>
+            </div>
+
+            <!-- Canvas Element for Wheel -->
+            <div class="canvas-wrapper">
+              <canvas id="wheel-canvas" width="600" height="600" role="img" aria-label="Spin and win wheel with 8 prizes: iPhone 18 Pro Max, 50,000 rupees, Better luck next time, 5 rupee, AirPods Pro Max, 500 rupee voucher, 1,000 gift card, and 50 rupee cashback"></canvas>
+            </div>
+
+            <!-- Center Metallic Spin Button -->
+            <div class="wheel-center-hub">
+              <button id="spin-btn" class="center-spin-btn" aria-label="Spin the wheel">
+                <span class="btn-glow"></span>
+                <span class="btn-text">SPIN</span>
+                <span class="btn-sub">WIN!</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wheel Controls & Bonus Actions -->
+        <div class="wheel-actions">
+          <button id="big-spin-btn" class="primary-action-btn pulse-glow">
+            <span class="btn-icon">⚡</span>
+            <span class="btn-label">SPIN THE WHEEL NOW</span>
+          </button>
+          <div class="secondary-actions">
+            <a 
+              href="#" 
+              id="main-whatsapp-share-btn" 
+              class="whatsapp-share-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Share on WhatsApp to get +3 Free Spins"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              <span>Share on WhatsApp (Get +3 Free Spins)</span>
+            </a>
+          </div>
+          <p class="chance-hint" id="status-message">✨ Tap <strong>SPIN</strong> to try your luck!</p>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Customer Reviews Section (Amazon Style) -->
+    <section class="reviews-section" id="reviews" aria-label="Customer Reviews">
+      <div class="reviews-header-block">
+        <h2 class="amazon-section-title">Reviews</h2>
+      </div>
+
+      <div class="amazon-reviews-layout">
+        <!-- Left Column: Ratings Summary & Customer Images -->
+        <aside class="amazon-summary-col">
+          <div class="overall-rating-card">
+            <div class="stars-aggregate">
+              <div class="star-rating amazon-stars" aria-label="4.9 out of 5 stars">★★★★★</div>
+              <span class="rating-score-text">4.9 out of 5</span>
+            </div>
+            <span class="total-ratings-count">14,832 global ratings</span>
+
+            <!-- 5-Star Histogram Bars -->
+            <div class="rating-histogram">
+              <div class="histogram-row">
+                <span class="hist-label">5 star</span>
+                <div class="hist-bar-track">
+                  <div class="hist-bar-fill" style="width: 92%;"></div>
+                </div>
+                <span class="hist-percent">92%</span>
+              </div>
+              <div class="histogram-row">
+                <span class="hist-label">4 star</span>
+                <div class="hist-bar-track">
+                  <div class="hist-bar-fill" style="width: 6%;"></div>
+                </div>
+                <span class="hist-percent">6%</span>
+              </div>
+              <div class="histogram-row">
+                <span class="hist-label">3 star</span>
+                <div class="hist-bar-track">
+                  <div class="hist-bar-fill" style="width: 1%;"></div>
+                </div>
+                <span class="hist-percent">1%</span>
+              </div>
+              <div class="histogram-row">
+                <span class="hist-label">2 star</span>
+                <div class="hist-bar-track">
+                  <div class="hist-bar-fill" style="width: 0.5%;"></div>
+                </div>
+                <span class="hist-percent">&lt;1%</span>
+              </div>
+              <div class="histogram-row">
+                <span class="hist-label">1 star</span>
+                <div class="hist-bar-track">
+                  <div class="hist-bar-fill" style="width: 0.5%;"></div>
+                </div>
+                <span class="hist-percent">&lt;1%</span>
+              </div>
+            </div>
+
+            <div class="amazon-divider"></div>
+
+            <!-- Customer Reviews with Images Strip -->
+            <div class="reviews-gallery-block">
+              <h3 class="gallery-title">Reviews with images</h3>
+              <div class="amazon-image-strip">
+                <img src="review iphone 1.jpg" alt="iPhone 18 Pro Max winner customer photo" class="strip-thumb" loading="lazy">
+                <img src="review iphone 2.jpg" alt="iPhone 18 Pro Max unboxing photo" class="strip-thumb" loading="lazy">
+                <img src="iphone review 3.jpg" alt="iPhone 18 Pro Max delivery box photo" class="strip-thumb" loading="lazy">
+                <img src="iphone review 4.webp" alt="iPhone 18 Pro Max titanium back photo" class="strip-thumb" loading="lazy">
+                <img src="iphone review 5.webp" alt="iPhone 18 Pro Max setup photo" class="strip-thumb" loading="lazy">
+                <img src="iphone review 6.webp" alt="iPhone 18 Pro Max camera screen photo" class="strip-thumb" loading="lazy">
+                <img src="iphone review 7.webp" alt="iPhone 18 Pro Max package photo" class="strip-thumb" loading="lazy">
+              </div>
+              <a href="#reviews-feed" class="see-all-images-link">See all 7 customer images</a>
+            </div>
+
+            <div class="amazon-divider"></div>
+
+            <!-- Write a Customer Review Box -->
+            <div class="amazon-write-review-box">
+              <h3 class="write-review-heading">Review this prize</h3>
+              <p class="write-review-sub">Share your thoughts and unboxing experience with other winners</p>
+              <button type="button" id="open-write-review-btn" class="amazon-write-btn">Write a customer review</button>
+            </div>
+          </div>
+
+          <!-- Add Review Form (Temporary Browser Storage Only) -->
+          <div id="write-review-container" class="write-review-container" hidden>
+            <form id="add-review-form" class="amazon-review-form">
+              <div class="form-header">
+                <h4 class="form-title">Create Review</h4>
+                <button type="button" id="close-review-form-btn" class="close-form-btn" aria-label="Close review form">✕</button>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Overall rating</label>
+                <div class="interactive-star-picker" id="star-picker" role="radiogroup" aria-label="Select star rating">
+                  <button type="button" class="star-pick-btn selected" data-val="1" aria-label="1 star">★</button>
+                  <button type="button" class="star-pick-btn selected" data-val="2" aria-label="2 stars">★</button>
+                  <button type="button" class="star-pick-btn selected" data-val="3" aria-label="3 stars">★</button>
+                  <button type="button" class="star-pick-btn selected" data-val="4" aria-label="4 stars">★</button>
+                  <button type="button" class="star-pick-btn selected" data-val="5" aria-label="5 stars">★</button>
+                </div>
+                <input type="hidden" id="review-rating-val" value="5">
+              </div>
+
+              <div class="form-group">
+                <label for="review-user-name" class="form-label">Your Name</label>
+                <input type="text" id="review-user-name" class="form-input" placeholder="e.g. Rohit Deshmukh" required>
+              </div>
+
+              <div class="form-group">
+                <label for="review-headline" class="form-label">Add a headline</label>
+                <input type="text" id="review-headline" class="form-input" placeholder="What's most important to know?" required>
+              </div>
+
+              <div class="form-group">
+                <label for="review-body" class="form-label">Add a written review</label>
+                <textarea id="review-body" class="form-textarea" rows="3" placeholder="What did you like about your prize, delivery, or experience?" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="review-photo-input" class="form-label">Add a photo (optional)</label>
+                <input type="file" id="review-photo-input" class="form-file-input" accept="image/*">
+                <div id="review-photo-preview" class="photo-preview-wrap" hidden>
+                  <img id="preview-img" alt="Uploaded review preview" class="preview-thumb">
+                  <button type="button" id="remove-preview-btn" class="remove-photo-btn">✕ Remove photo</button>
+                </div>
+              </div>
+
+              <div class="form-actions-row">
+                <button type="submit" class="amazon-submit-review-btn">Submit Review</button>
+                <button type="button" id="cancel-review-btn" class="amazon-cancel-review-btn">Cancel</button>
+              </div>
+              <p class="form-temp-note">🔒 Saved temporarily in your browser session only (no database storage).</p>
+            </form>
+          </div>
+        </aside>
+
+        <!-- Right Column: Top Reviews Feed -->
+        <div class="amazon-feed-col" id="reviews-feed">
+          <div class="feed-header-row">
+            <h3 class="feed-heading">Top reviews from India</h3>
+            <span class="sort-by-text" id="reviews-showing-count">Showing 5 of 7 reviews</span>
+          </div>
+
+          <div id="reviews-feed-list" class="reviews-feed-list">
+          <!-- Review 1 -->
+          <article class="amazon-review-item">
+            <div class="amazon-user-row">
+              <div class="amazon-avatar-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="#a395be">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                </svg>
+              </div>
+              <span class="amazon-user-name">Rahul Sharma</span>
+            </div>
+            <div class="amazon-rating-row">
+              <span class="amazon-stars" aria-label="5.0 out of 5 stars">★★★★★</span>
+              <h4 class="amazon-review-headline">100% Genuine! Brand new sealed iPhone 18 Pro Max delivered to Mumbai</h4>
+            </div>
+            <div class="amazon-meta-row">
+              <span class="review-date">Reviewed in India on 29 October 2026</span>
+              <span class="review-variant">Edition: 1TB Natural Titanium</span>
+              <span class="amazon-verified-badge">Verified Purchase</span>
+            </div>
+            <p class="amazon-review-body">
+              I honestly couldn't believe it when the wheel landed on iPhone 18 Pro Max! Thought it might be a gimmick, but within 24 hours I got the official Blue Dart tracking number. The package arrived in brand new sealed condition with original Apple Care warranty. Camera quality and battery backup are unbelievable. Huge thanks to the Diwali Dhamaka team for making our festival unforgettable!
+            </p>
+            <div class="review-customer-images">
+              <img src="review iphone 1.jpg" alt="Rahul Sharma received iPhone 18 Pro Max review image" class="review-thumbnail-img" loading="lazy">
+            </div>
+            <div class="amazon-review-footer">
+              <span class="helpful-count">342 people found this helpful</span>
+              <div class="helpful-action-group">
+                <button type="button" class="amazon-helpful-btn">Helpful</button>
+                <span class="amazon-pipe">|</span>
+                <button type="button" class="amazon-report-btn">Report</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Review 2 -->
+          <article class="amazon-review-item">
+            <div class="amazon-user-row">
+              <div class="amazon-avatar-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="#a395be">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                </svg>
+              </div>
+              <span class="amazon-user-name">Amit Verma</span>
+            </div>
+            <div class="amazon-rating-row">
+              <span class="amazon-stars" aria-label="5.0 out of 5 stars">★★★★★</span>
+              <h4 class="amazon-review-headline">Speechless! Verified serial number on Apple website - full 1 year warranty active</h4>
+            </div>
+            <div class="amazon-meta-row">
+              <span class="review-date">Reviewed in India on 28 October 2026</span>
+              <span class="review-variant">Edition: 1TB Desert Titanium</span>
+              <span class="amazon-verified-badge">Verified Purchase</span>
+            </div>
+            <p class="amazon-review-body">
+              Spun the wheel during lunch break and hit the grand prize. Submitted my voucher code and address right away. The delivery box was safely packaged with double tamper-proof tape. Checked the serial number on checkcoverage.apple.com and it shows valid purchase date and active warranty. Thank you so much for keeping this 100% real!
+            </p>
+            <div class="review-customer-images">
+              <img src="review iphone 2.jpg" alt="Amit Verma unboxing photo" class="review-thumbnail-img" loading="lazy">
+            </div>
+            <div class="amazon-review-footer">
+              <span class="helpful-count">198 people found this helpful</span>
+              <div class="helpful-action-group">
+                <button type="button" class="amazon-helpful-btn">Helpful</button>
+                <span class="amazon-pipe">|</span>
+                <button type="button" class="amazon-report-btn">Report</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Review 3 -->
+          <article class="amazon-review-item">
+            <div class="amazon-user-row">
+              <div class="amazon-avatar-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="#a395be">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                </svg>
+              </div>
+              <span class="amazon-user-name">Pooja Gupta</span>
+            </div>
+            <div class="amazon-rating-row">
+              <span class="amazon-stars" aria-label="5.0 out of 5 stars">★★★★★</span>
+              <h4 class="amazon-review-headline">Fastest delivery ever! Best Diwali gift my family has ever received</h4>
+            </div>
+            <div class="amazon-meta-row">
+              <span class="review-date">Reviewed in India on 27 October 2026</span>
+              <span class="review-variant">Edition: 1TB White Titanium</span>
+              <span class="amazon-verified-badge">Verified Purchase</span>
+            </div>
+            <p class="amazon-review-body">
+              Sharing my honest review with photo proof. Received within 48 hours in Bengaluru. The device is blazing fast, display brightness under sunlight is amazing, and the dynamic island features are so fluid. Everyone in my office couldn't believe I won it from the festive lucky spin. Best festive Dhamaka ever!
+            </p>
+            <div class="review-customer-images">
+              <img src="iphone review 3.jpg" alt="Pooja Gupta delivery box review image" class="review-thumbnail-img" loading="lazy">
+            </div>
+            <div class="amazon-review-footer">
+              <span class="helpful-count">115 people found this helpful</span>
+              <div class="helpful-action-group">
+                <button type="button" class="amazon-helpful-btn">Helpful</button>
+                <span class="amazon-pipe">|</span>
+                <button type="button" class="amazon-report-btn">Report</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Review 4 -->
+          <article class="amazon-review-item">
+            <div class="amazon-user-row">
+              <div class="amazon-avatar-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="#a395be">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                </svg>
+              </div>
+              <span class="amazon-user-name">Vikram Malhotra</span>
+            </div>
+            <div class="amazon-rating-row">
+              <span class="amazon-stars" aria-label="5.0 out of 5 stars">★★★★★</span>
+              <h4 class="amazon-review-headline">Grade A packaging and sealed retail box. Incredible camera!</h4>
+            </div>
+            <div class="amazon-meta-row">
+              <span class="review-date">Reviewed in India on 26 October 2026</span>
+              <span class="review-variant">Edition: 1TB Black Titanium</span>
+              <span class="amazon-verified-badge">Verified Purchase</span>
+            </div>
+            <p class="amazon-review-body">
+              Took this photo right after unboxing the phone. Build quality is aerospace grade titanium. Transferred all my data from old phone seamlessly. Thank you team for transparent wheel odds and honoring the grand prize win!
+            </p>
+            <div class="review-customer-images">
+              <img src="iphone review 4.webp" alt="Vikram Malhotra titanium back photo" class="review-thumbnail-img" loading="lazy">
+            </div>
+            <div class="amazon-review-footer">
+              <span class="helpful-count">84 people found this helpful</span>
+              <div class="helpful-action-group">
+                <button type="button" class="amazon-helpful-btn">Helpful</button>
+                <span class="amazon-pipe">|</span>
+                <button type="button" class="amazon-report-btn">Report</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Review 5 -->
+          <article class="amazon-review-item">
+            <div class="amazon-user-row">
+              <div class="amazon-avatar-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="#a395be">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                </svg>
+              </div>
+              <span class="amazon-user-name">Priya Patel</span>
+            </div>
+            <div class="amazon-rating-row">
+              <span class="amazon-stars" aria-label="5.0 out of 5 stars">★★★★★</span>
+              <h4 class="amazon-review-headline">Set up completed! Legit prize from Ahmedabad winner</h4>
+            </div>
+            <div class="amazon-meta-row">
+              <span class="review-date">Reviewed in India on 25 October 2026</span>
+              <span class="review-variant">Edition: 1TB Natural Titanium</span>
+              <span class="amazon-verified-badge">Verified Purchase</span>
+            </div>
+            <p class="amazon-review-body">
+              Attaching my setup picture. I was skeptical initially, but after receiving the OTP and Blue Dart dispatch notice, I knew it was genuine. Got ₹50,000 cash for my brother earlier and now this flagship iPhone. Thank you from the bottom of my heart!
+            </p>
+            <div class="review-customer-images">
+              <img src="iphone review 5.webp" alt="Priya Patel setup photo" class="review-thumbnail-img" loading="lazy">
+            </div>
+            <div class="amazon-review-footer">
+              <span class="helpful-count">142 people found this helpful</span>
+              <div class="helpful-action-group">
+                <button type="button" class="amazon-helpful-btn">Helpful</button>
+                <span class="amazon-pipe">|</span>
+                <button type="button" class="amazon-report-btn">Report</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Review 6 (Collapsible) -->
+          <article class="amazon-review-item review-collapsible" style="display: none;">
+            <div class="amazon-user-row">
+              <div class="amazon-avatar-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="#a395be">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                </svg>
+              </div>
+              <span class="amazon-user-name">Sneha Reddy</span>
+            </div>
+            <div class="amazon-rating-row">
+              <span class="amazon-stars" aria-label="5.0 out of 5 stars">★★★★★</span>
+              <h4 class="amazon-review-headline">Stunning camera and smooth iOS experience</h4>
+            </div>
+            <div class="amazon-meta-row">
+              <span class="review-date">Reviewed in India on 24 October 2026</span>
+              <span class="review-variant">Edition: 1TB Desert Titanium</span>
+              <span class="amazon-verified-badge">Verified Purchase</span>
+            </div>
+            <p class="amazon-review-body">
+              Took this photo showing the gorgeous titanium frame and display. Everything came sealed with original cable and Apple documentation. Definitely worth participating in this festive lucky wheel event!
+            </p>
+            <div class="review-customer-images">
+              <img src="iphone review 6.webp" alt="Sneha Reddy camera screen photo" class="review-thumbnail-img" loading="lazy">
+            </div>
+            <div class="amazon-review-footer">
+              <span class="helpful-count">67 people found this helpful</span>
+              <div class="helpful-action-group">
+                <button type="button" class="amazon-helpful-btn">Helpful</button>
+                <span class="amazon-pipe">|</span>
+                <button type="button" class="amazon-report-btn">Report</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Review 7 (Collapsible) -->
+          <article class="amazon-review-item review-collapsible" style="display: none;">
+            <div class="amazon-user-row">
+              <div class="amazon-avatar-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="#a395be">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                </svg>
+              </div>
+              <span class="amazon-user-name">Ananya Joshi</span>
+            </div>
+            <div class="amazon-rating-row">
+              <span class="amazon-stars" aria-label="5.0 out of 5 stars">★★★★★</span>
+              <h4 class="amazon-review-headline">Safe and prompt courier delivery to Pune. Fully verified!</h4>
+            </div>
+            <div class="amazon-meta-row">
+              <span class="review-date">Reviewed in India on 23 October 2026</span>
+              <span class="review-variant">Edition: 1TB Natural Titanium</span>
+              <span class="amazon-verified-badge">Verified Purchase</span>
+            </div>
+            <p class="amazon-review-body">
+              Here is my delivery box package photo. Everything from claim code entry to doorstep delivery was handled with top-notch professionalism. Best lucky spin experience ever!
+            </p>
+            <div class="review-customer-images">
+              <img src="iphone review 7.webp" alt="Ananya Joshi delivery package photo" class="review-thumbnail-img" loading="lazy">
+            </div>
+            <div class="amazon-review-footer">
+              <span class="helpful-count">53 people found this helpful</span>
+              <div class="helpful-action-group">
+                <button type="button" class="amazon-helpful-btn">Helpful</button>
+                <span class="amazon-pipe">|</span>
+                <button type="button" class="amazon-report-btn">Report</button>
+              </div>
+            </div>
+          </article>
+          </div>
+
+          <!-- Pagination: View All Reviews Button -->
+          <div class="reviews-pagination-row">
+            <button type="button" id="view-all-reviews-btn" class="amazon-view-all-btn">
+              <span id="view-all-text">View all reviews (7)</span>
+              <span id="view-all-arrow" class="btn-arrow">▼</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rules & FAQ Section (Native Semantic Details) -->
+    <section class="faq-section" id="faq">
+      <div class="section-title-wrap">
+        <span class="section-eyebrow">COMMON QUESTIONS</span>
+        <h2 class="section-heading"><span>Frequently Asked Questions</span></h2>
+      </div>
+      <div class="faq-accordion">
+        <details class="faq-item" open>
+          <summary class="faq-question">
+            <span>Is this game for entertainment only? Is there real money or gambling?</span>
+            <span class="faq-arrow">▼</span>
+          </summary>
+          <div class="faq-answer">
+            <p><strong>Yes, this website is 100% for entertainment and fun only.</strong> There is <strong>no real money, no gambling, no betting, no deposits, and no real physical prizes or monetary payouts</strong>. This is a static, client-side festive spin-wheel simulator. All prize items, cash figures (₹), and vouchers shown on the wheel or rewards are simulated virtual in-game assets created purely for festive celebration and amusement with friends and family.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>What are the 8 prizes on the wheel?</span>
+            <span class="faq-arrow">▼</span>
+          </summary>
+          <div class="faq-answer">
+            <p>The wheel is divided into 8 equal parts featuring:</p>
+            <ul>
+              <li><strong>Slot 1:</strong> 📱 <em>Grand Prize:</em> Brand new <strong>iPhone 18 Pro Max (1TB)</strong></li>
+              <li><strong>Slot 2:</strong> 💰 <em>2nd Grand Prize:</em> <strong>₹50,000 Mega Cash</strong> credited directly via UPI/Bank</li>
+              <li><strong>Slot 3:</strong> 🍀 <strong>Better Luck Next Time</strong> (Claim free bonus spins!)</li>
+              <li><strong>Slot 4:</strong> 🪙 <strong>₹5 Instant Pocket Cash</strong> prize</li>
+              <li><strong>Slot 5:</strong> 🎧 <strong>Apple AirPods Pro Max</strong></li>
+              <li><strong>Slot 6:</strong> 🛍️ <strong>₹500 Shopping Voucher</strong> for top fashion &amp; electronics</li>
+              <li><strong>Slot 7:</strong> 🎁 <strong>₹1,000 Amazon / Flipkart Gift Voucher</strong></li>
+              <li><strong>Slot 8:</strong> ⚡ <strong>₹50 Instant UPI Cashback</strong></li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>How do I claim my iPhone 18 Pro Max or ₹50,000 cash?</span>
+            <span class="faq-arrow">▼</span>
+          </summary>
+          <div class="faq-answer">
+            <p>When you land on any prize, a winner certificate code is instantly generated. Click <strong>"Claim Reward Now"</strong> to copy your unique redemption code and submit your delivery address or UPI ID.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>What happens if I run out of spins?</span>
+            <span class="faq-arrow">▼</span>
+          </summary>
+          <div class="faq-answer">
+            <p>You can click the <strong>"Share on WhatsApp"</strong> button anytime to share with friends and get <strong>+3 Free Spins</strong> to keep playing!</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- New Year 2027 Upcoming Games Section -->
+    <section class="upcoming-games-section" id="upcoming-games" aria-label="Upcoming New Year 2027 Games">
+      <div class="section-title-wrap">
+        <span class="section-eyebrow">FESTIVE ROADMAP &amp; 2027 PREVIEW</span>
+        <h2 class="section-heading"><span>New Year 2027 Upcoming Games</span></h2>
+        <p class="subtitle">The festive dhamaka continues! Get ready for our next grand release of instant-win festive games. Pre-register today to unlock free VIP bonus spins on launch day.</p>
+      </div>
+
+      <div class="upcoming-grid">
+        <!-- Game 1 -->
+        <article class="upcoming-card">
+          <div class="upcoming-header-row">
+            <span class="upcoming-badge badge-ny">MIDNIGHT COUNTDOWN</span>
+            <span class="upcoming-date">Dec 31, 2026</span>
+          </div>
+          <div class="upcoming-icon-wrap" aria-hidden="true">🎆</div>
+          <h3 class="upcoming-title">New Year 2027 Midnight Wheel</h3>
+          <div class="upcoming-prize-box">
+            <span class="upcoming-prize-label">Grand Jackpot Pool</span>
+            <span class="upcoming-prize-val">₹1,00,000 Cash + Dubai Holiday Package</span>
+          </div>
+          <p class="upcoming-desc">
+            Count down the final seconds of 2026 with our live synchronized jackpot wheel featuring golden 10X multiplier slots and real-time community prize drops.
+          </p>
+          <ul class="upcoming-features">
+            <li>✨ Synchronized live midnight countdown timer</li>
+            <li>⚡ 10X Multipliers during Golden Hour</li>
+            <li>🎁 10 Free Spins for all pre-registered players</li>
+          </ul>
+          <button type="button" class="upcoming-notify-btn" data-game="New Year 2027 Midnight Wheel">
+            <span>🔔 Pre-Register (10 Free Spins)</span>
+          </button>
+        </article>
+
+        <!-- Game 2 -->
+        <article class="upcoming-card">
+          <div class="upcoming-header-row">
+            <span class="upcoming-badge badge-dice">DICE REWARD ROLLER</span>
+            <span class="upcoming-date">Jan 1, 2027</span>
+          </div>
+          <div class="upcoming-icon-wrap" aria-hidden="true">🎲</div>
+          <h3 class="upcoming-title">Golden Jackpot 3D Dice Roll</h3>
+          <div class="upcoming-prize-box">
+            <span class="upcoming-prize-label">Top Tier Reward</span>
+            <span class="upcoming-prize-val">Apple MacBook Pro M4 &amp; 24K Gold Bar</span>
+          </div>
+          <p class="upcoming-desc">
+            Test your festive fortune in our physics-driven 3D dice rolling arena. Roll consecutive doubles to ascend the jackpot staircase toward gold rewards.
+          </p>
+          <ul class="upcoming-features">
+            <li>✨ WebGL 3D dice physics with audio tactile feedback</li>
+            <li>⚡ Consecutive roll multipliers and streak jackpots</li>
+            <li>🎁 Guaranteed reward token on day 1 login</li>
+          </ul>
+          <button type="button" class="upcoming-notify-btn" data-game="Golden Jackpot 3D Dice Roll">
+            <span>🔔 Pre-Register (Free VIP Pass)</span>
+          </button>
+        </article>
+
+        <!-- Game 3 -->
+        <article class="upcoming-card">
+          <div class="upcoming-header-row">
+            <span class="upcoming-badge badge-scratch">INSTANT SCRATCH CARDS</span>
+            <span class="upcoming-date">Jan 5, 2027</span>
+          </div>
+          <div class="upcoming-icon-wrap" aria-hidden="true">🎫</div>
+          <h3 class="upcoming-title">Festive Fortune Scratch &amp; Win</h3>
+          <div class="upcoming-prize-box">
+            <span class="upcoming-prize-label">Instant Reward Pool</span>
+            <span class="upcoming-prize-val">Sony PS5 Pro &amp; ₹25,000 Amazon Vouchers</span>
+          </div>
+          <p class="upcoming-desc">
+            Use your fingertip or mouse to scratch off golden foil cards in real time. Match 3 symbols to reveal instant UPI transfers and gaming consoles.
+          </p>
+          <ul class="upcoming-features">
+            <li>✨ Hyper-realistic canvas scratch foil simulation</li>
+            <li>⚡ 9 matching slot combinations with instant payout</li>
+            <li>🎁 5 Free scratch cards upon opening</li>
+          </ul>
+          <button type="button" class="upcoming-notify-btn" data-game="Festive Fortune Scratch & Win">
+            <span>🔔 Pre-Register (5 Scratch Cards)</span>
+          </button>
+        </article>
+
+        <!-- Game 4 -->
+        <article class="upcoming-card">
+          <div class="upcoming-header-row">
+            <span class="upcoming-badge badge-trivia">SKILL &amp; KNOWLEDGE</span>
+            <span class="upcoming-date">Jan 10, 2027</span>
+          </div>
+          <div class="upcoming-icon-wrap" aria-hidden="true">🧠</div>
+          <h3 class="upcoming-title">National Festive Quiz League</h3>
+          <div class="upcoming-prize-box">
+            <span class="upcoming-prize-label">Skill Prize Pool</span>
+            <span class="upcoming-prize-val">₹50,000 Direct UPI Leaderboard Pot</span>
+          </div>
+          <p class="upcoming-desc">
+            Put your festive knowledge, Bollywood culture, and general knowledge to the test in fast-paced 60-second trivia rounds against players across India.
+          </p>
+          <ul class="upcoming-features">
+            <li>✨ Daily lightning quiz rounds with instant scoring</li>
+            <li>⚡ Fair-play anti-cheat proctored timer</li>
+            <li>🎁 Top 100 participants share the daily pool</li>
+          </ul>
+          <button type="button" class="upcoming-notify-btn" data-game="National Festive Quiz League">
+            <span>🔔 Pre-Register (Early Bird Entry)</span>
+          </button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Dialog for Prize Announcement (Native HTML5 <dialog> with modern discrete transition) -->
+  <dialog id="prize-dialog" class="prize-modal" aria-labelledby="dialog-title" closedby="any">
+    <div class="modal-card" id="modal-card">
+      <button type="button" class="modal-close-btn" id="dialog-close-btn" aria-label="Close dialog">✕</button>
+      
+      <!-- Step 1: Prize Reveal View -->
+      <div id="modal-reveal-view">
+        <div class="modal-celebration" id="modal-celebration">
+          <div class="confetti-burst-icon" id="modal-icon">🎉</div>
+          <div class="sparkle-ring"></div>
+        </div>
+
+        <div class="modal-body">
+          <span class="prize-tag" id="modal-tag">MEGA WINNER</span>
+          <h2 id="dialog-title" class="modal-title">Congratulations!</h2>
+          <p class="modal-subtitle" id="modal-subtitle">You have unlocked an amazing prize!</p>
+          
+          <div class="won-prize-box" id="modal-prize-box">
+            <div class="won-icon" id="won-prize-icon">📱</div>
+            <div class="won-details">
+              <div class="won-name" id="won-prize-name">iPhone 18 Pro Max</div>
+              <div class="won-desc" id="won-prize-desc">Grand Prize Edition - 1TB Titanium Edition</div>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" id="claim-now-btn" class="modal-action-btn primary">
+              <span>🎁 Claim Reward Now</span>
+            </button>
+            <button type="button" id="modal-spin-again-btn" class="modal-action-btn secondary" autofocus>
+              <span>🎡 Spin Again</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Share with Friends & Claim Confirmation Card -->
+      <div id="modal-claim-card" hidden>
+        <div class="modal-celebration">
+          <div class="confetti-burst-icon">🎁</div>
+          <div class="sparkle-ring"></div>
+        </div>
+
+        <div class="modal-body">
+          <span class="prize-tag" style="background: linear-gradient(90deg, #10b981, #0891b2);">REWARD PENDING</span>
+          <h2 class="modal-title">Share with Friends &amp; Claim</h2>
+          <p class="modal-subtitle">Celebrate your win! Share this Diwali offer with your friends and family on WhatsApp.</p>
+
+          <div class="claim-share-card">
+            <a 
+              href="#" 
+              id="whatsappShareBtn" 
+              class="whatsapp-share-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Share on WhatsApp to get +3 Free Spins"
+            >
+              <!-- WhatsApp Icon (SVG) -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              <span>Share on WhatsApp (CLAIM IT)</span>
+            </a>
+
+            <div class="bonus-spins-badge">
+              <span class="bonus-badge-icon">🎁</span>
+              <span>Share on WhatsApp with 5 groups to <strong>CLAIM IT</strong>!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Confetti Canvas Overlay -->
+  <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" role="status" aria-live="polite"></div>
+
+  <!-- Footer (4-Column Professional AdSense Layout) -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <!-- Col 1: About & Trust -->
+        <div class="footer-col">
+          <div class="footer-brand-title">
+            <span aria-hidden="true">🪔</span>
+            <span>Diwali Dhamaka 2026</span>
+          </div>
+          <p class="footer-about-text">
+            A static festive spin-wheel web simulation built strictly for fun, entertainment, and holiday celebration. Zero real money, no betting, no deposits, and no physical prizes or payouts.
+          </p>
+          <div class="footer-trust-badges">
+            <span class="trust-badge-pill">🎮 100% Fun &amp; Entertainment</span>
+            <span class="trust-badge-pill">🚫 No Real Money / No Gambling</span>
+            <span class="trust-badge-pill">🎡 Static Wheel Simulator</span>
+            <span class="trust-badge-pill">✨ Festive Free Play</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Games & Features -->
+        <div class="footer-col">
+          <h4>Festive Hub</h4>
+          <ul class="footer-links-list">
+            <li><a href="index.html#wheel-section">🎯 Lucky Spin Wheel</a></li>
+            <li><a href="index.html#upcoming-games">🎆 New Year 2027 Games</a></li>
+            <li><a href="index.html#reviews">⭐ Customer Proof Reviews</a></li>
+            <li><a href="index.html#faq">❓ Contest Rules &amp; FAQ</a></li>
+            <li><a href="about-us.html#fair-play">⚖️ Fair Play Certification</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Mandatory Legal Pages -->
+        <div class="footer-col">
+          <h4>Legal &amp; Policy</h4>
+          <ul class="footer-links-list">
+            <li><a href="privacy-policy.html">🔒 Privacy Policy</a></li>
+            <li><a href="terms.html">📜 Terms &amp; Conditions</a></li>
+            <li><a href="disclaimer.html">⚠️ Legal Disclaimer</a></li>
+            <li><a href="privacy-policy.html#adsense-cookies">🍪 Cookie &amp; Ad Choices</a></li>
+            <li><a href="privacy-policy.html#gdpr-ccpa">🌐 GDPR &amp; CCPA Notice</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Corporate & Contact -->
+        <div class="footer-col">
+          <h4>Corporate &amp; Contact</h4>
+          <div class="footer-contact-item">
+            <span class="contact-icon">📍</span>
+            <span>Diwali Dhamaka Media Network<br>Bandra Kurla Complex (BKC), Mumbai, MH 400051</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="contact-icon">✉️</span>
+            <span><a href="mailto:support@diwalidhamaka.in">support@diwalidhamaka.in</a></span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="contact-icon">🕒</span>
+            <span>Support: Mon - Sat (9 AM - 7 PM IST)</span>
+          </div>
+          <ul class="footer-links-list" style="margin-top: 0.5rem;">
+            <li><a href="about-us.html">👥 About Our Organization</a></li>
+            <li><a href="contact-us.html">📬 Help Desk &amp; Contact Form</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom-row">
+        <p>&copy; 2026 Diwali Dhamaka Interactive Studios. All rights reserved. Strictly 18+ only. Play responsibly.</p>
+        <p class="festive-wish">Wishing you and your family a Happy, Prosperous &amp; Joyous Festival season!</p>
+      </div>
+
+      <p class="footer-adsense-disclosure">
+        <strong>Entertainment &amp; Simulation Disclaimer:</strong> This website is an interactive static web application created purely for festive amusement, fun, and entertainment. <strong>No real money, gambling, betting, deposits, or actual physical or cash prizes are offered, wagered, won, or distributed.</strong> All items, brands, currency symbols (₹), and prize numbers shown are simulated virtual game assets for demonstration and celebratory fun. Third-party vendors, including Google, use cookies to serve ads based on prior visits. All third-party trademarks (e.g., iPhone, Apple, Amazon, Flipkart) belong to their respective owners without affiliation or endorsement.
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
