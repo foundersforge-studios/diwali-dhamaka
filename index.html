@@ -161,75 +161,82 @@
         <!-- Left Column: Ratings Summary & Customer Images -->
         <aside class="amazon-summary-col">
           <div class="overall-rating-card">
-            <div class="stars-aggregate">
-              <div class="star-rating amazon-stars" aria-label="4.9 out of 5 stars">★★★★★</div>
-              <span class="rating-score-text">4.9 out of 5</span>
-            </div>
-            <span class="total-ratings-count">14,832 global ratings</span>
+            <!-- Left Pane: Ratings Summary & Histogram -->
+            <div class="rating-overview-pane">
+              <div class="stars-aggregate">
+                <div class="star-rating amazon-stars" aria-label="4.9 out of 5 stars">★★★★★</div>
+                <span class="rating-score-text">4.9 out of 5</span>
+              </div>
+              <span class="total-ratings-count">14,832 global ratings</span>
 
-            <!-- 5-Star Histogram Bars -->
-            <div class="rating-histogram">
-              <div class="histogram-row">
-                <span class="hist-label">5 star</span>
-                <div class="hist-bar-track">
-                  <div class="hist-bar-fill" style="width: 92%;"></div>
+              <!-- 5-Star Histogram Bars -->
+              <div class="rating-histogram">
+                <div class="histogram-row">
+                  <span class="hist-label">5 star</span>
+                  <div class="hist-bar-track">
+                    <div class="hist-bar-fill" style="width: 92%;"></div>
+                  </div>
+                  <span class="hist-percent">92%</span>
                 </div>
-                <span class="hist-percent">92%</span>
-              </div>
-              <div class="histogram-row">
-                <span class="hist-label">4 star</span>
-                <div class="hist-bar-track">
-                  <div class="hist-bar-fill" style="width: 6%;"></div>
+                <div class="histogram-row">
+                  <span class="hist-label">4 star</span>
+                  <div class="hist-bar-track">
+                    <div class="hist-bar-fill" style="width: 6%;"></div>
+                  </div>
+                  <span class="hist-percent">6%</span>
                 </div>
-                <span class="hist-percent">6%</span>
-              </div>
-              <div class="histogram-row">
-                <span class="hist-label">3 star</span>
-                <div class="hist-bar-track">
-                  <div class="hist-bar-fill" style="width: 1%;"></div>
+                <div class="histogram-row">
+                  <span class="hist-label">3 star</span>
+                  <div class="hist-bar-track">
+                    <div class="hist-bar-fill" style="width: 1%;"></div>
+                  </div>
+                  <span class="hist-percent">1%</span>
                 </div>
-                <span class="hist-percent">1%</span>
-              </div>
-              <div class="histogram-row">
-                <span class="hist-label">2 star</span>
-                <div class="hist-bar-track">
-                  <div class="hist-bar-fill" style="width: 0.5%;"></div>
+                <div class="histogram-row">
+                  <span class="hist-label">2 star</span>
+                  <div class="hist-bar-track">
+                    <div class="hist-bar-fill" style="width: 0.5%;"></div>
+                  </div>
+                  <span class="hist-percent">&lt;1%</span>
                 </div>
-                <span class="hist-percent">&lt;1%</span>
-              </div>
-              <div class="histogram-row">
-                <span class="hist-label">1 star</span>
-                <div class="hist-bar-track">
-                  <div class="hist-bar-fill" style="width: 0.5%;"></div>
+                <div class="histogram-row">
+                  <span class="hist-label">1 star</span>
+                  <div class="hist-bar-track">
+                    <div class="hist-bar-fill" style="width: 0.5%;"></div>
+                  </div>
+                  <span class="hist-percent">&lt;1%</span>
                 </div>
-                <span class="hist-percent">&lt;1%</span>
               </div>
-            </div>
-
-            <div class="amazon-divider"></div>
-
-            <!-- Customer Reviews with Images Strip -->
-            <div class="reviews-gallery-block">
-              <h3 class="gallery-title">Reviews with images</h3>
-              <div class="amazon-image-strip">
-                <img src="review iphone 1.jpg" alt="iPhone 18 Pro Max winner customer photo" class="strip-thumb" loading="lazy">
-                <img src="review iphone 2.jpg" alt="iPhone 18 Pro Max unboxing photo" class="strip-thumb" loading="lazy">
-                <img src="iphone review 3.jpg" alt="iPhone 18 Pro Max delivery box photo" class="strip-thumb" loading="lazy">
-                <img src="iphone review 4.webp" alt="iPhone 18 Pro Max titanium back photo" class="strip-thumb" loading="lazy">
-                <img src="iphone review 5.webp" alt="iPhone 18 Pro Max setup photo" class="strip-thumb" loading="lazy">
-                <img src="iphone review 6.webp" alt="iPhone 18 Pro Max camera screen photo" class="strip-thumb" loading="lazy">
-                <img src="iphone review 7.webp" alt="iPhone 18 Pro Max package photo" class="strip-thumb" loading="lazy">
-              </div>
-              <a href="#reviews-feed" class="see-all-images-link">See all 7 customer images</a>
             </div>
 
-            <div class="amazon-divider"></div>
+            <div class="amazon-divider rating-pane-divider" aria-hidden="true"></div>
+            <div class="rating-pane-divider-vertical" aria-hidden="true"></div>
 
-            <!-- Write a Customer Review Box -->
-            <div class="amazon-write-review-box">
-              <h3 class="write-review-heading">Review this prize</h3>
-              <p class="write-review-sub">Share your thoughts and unboxing experience with other winners</p>
-              <button type="button" id="open-write-review-btn" class="amazon-write-btn">Write a customer review</button>
+            <!-- Right Pane: Gallery & Write Review Box -->
+            <div class="rating-actions-pane">
+              <!-- Customer Reviews with Images Strip -->
+              <div class="reviews-gallery-block">
+                <h3 class="gallery-title">Reviews with images</h3>
+                <div class="amazon-image-strip">
+                  <img src="review iphone 1.jpg" alt="iPhone 18 Pro Max winner customer photo" class="strip-thumb" width="60" height="60" loading="lazy">
+                  <img src="review iphone 2.jpg" alt="iPhone 18 Pro Max unboxing photo" class="strip-thumb" width="60" height="60" loading="lazy">
+                  <img src="iphone review 3.jpg" alt="iPhone 18 Pro Max delivery box photo" class="strip-thumb" width="60" height="60" loading="lazy">
+                  <img src="iphone review 4.webp" alt="iPhone 18 Pro Max titanium back photo" class="strip-thumb" width="60" height="60" loading="lazy">
+                  <img src="iphone review 5.webp" alt="iPhone 18 Pro Max setup photo" class="strip-thumb" width="60" height="60" loading="lazy">
+                  <img src="iphone review 6.webp" alt="iPhone 18 Pro Max camera screen photo" class="strip-thumb" width="60" height="60" loading="lazy">
+                  <img src="iphone review 7.webp" alt="iPhone 18 Pro Max package photo" class="strip-thumb" width="60" height="60" loading="lazy">
+                </div>
+                <a href="#reviews-feed" class="see-all-images-link">See all 7 customer images</a>
+              </div>
+
+              <div class="amazon-divider"></div>
+
+              <!-- Write a Customer Review Box -->
+              <div class="amazon-write-review-box">
+                <h3 class="write-review-heading">Review this prize</h3>
+                <p class="write-review-sub">Share your thoughts and unboxing experience with other winners</p>
+                <button type="button" id="open-write-review-btn" class="amazon-write-btn">Write a customer review</button>
+              </div>
             </div>
           </div>
 
@@ -317,7 +324,7 @@
               I honestly couldn't believe it when the wheel landed on iPhone 18 Pro Max! Thought it might be a gimmick, but within 24 hours I got the official Blue Dart tracking number. The package arrived in brand new sealed condition with original Apple Care warranty. Camera quality and battery backup are unbelievable. Huge thanks to the Diwali Dhamaka team for making our festival unforgettable!
             </p>
             <div class="review-customer-images">
-              <img src="review iphone 1.jpg" alt="Rahul Sharma received iPhone 18 Pro Max review image" class="review-thumbnail-img" loading="lazy">
+              <img src="review iphone 1.jpg" alt="Rahul Sharma received iPhone 18 Pro Max review image" class="review-thumbnail-img" width="160" height="160" loading="lazy">
             </div>
             <div class="amazon-review-footer">
               <span class="helpful-count">342 people found this helpful</span>
@@ -352,7 +359,7 @@
               Spun the wheel during lunch break and hit the grand prize. Submitted my voucher code and address right away. The delivery box was safely packaged with double tamper-proof tape. Checked the serial number on checkcoverage.apple.com and it shows valid purchase date and active warranty. Thank you so much for keeping this 100% real!
             </p>
             <div class="review-customer-images">
-              <img src="review iphone 2.jpg" alt="Amit Verma unboxing photo" class="review-thumbnail-img" loading="lazy">
+              <img src="review iphone 2.jpg" alt="Amit Verma unboxing photo" class="review-thumbnail-img" width="160" height="160" loading="lazy">
             </div>
             <div class="amazon-review-footer">
               <span class="helpful-count">198 people found this helpful</span>
@@ -387,7 +394,7 @@
               Sharing my honest review with photo proof. Received within 48 hours in Bengaluru. The device is blazing fast, display brightness under sunlight is amazing, and the dynamic island features are so fluid. Everyone in my office couldn't believe I won it from the festive lucky spin. Best festive Dhamaka ever!
             </p>
             <div class="review-customer-images">
-              <img src="iphone review 3.jpg" alt="Pooja Gupta delivery box review image" class="review-thumbnail-img" loading="lazy">
+              <img src="iphone review 3.jpg" alt="Pooja Gupta delivery box review image" class="review-thumbnail-img" width="160" height="160" loading="lazy">
             </div>
             <div class="amazon-review-footer">
               <span class="helpful-count">115 people found this helpful</span>
@@ -422,7 +429,7 @@
               Took this photo right after unboxing the phone. Build quality is aerospace grade titanium. Transferred all my data from old phone seamlessly. Thank you team for transparent wheel odds and honoring the grand prize win!
             </p>
             <div class="review-customer-images">
-              <img src="iphone review 4.webp" alt="Vikram Malhotra titanium back photo" class="review-thumbnail-img" loading="lazy">
+              <img src="iphone review 4.webp" alt="Vikram Malhotra titanium back photo" class="review-thumbnail-img" width="160" height="160" loading="lazy">
             </div>
             <div class="amazon-review-footer">
               <span class="helpful-count">84 people found this helpful</span>
@@ -457,7 +464,7 @@
               Attaching my setup picture. I was skeptical initially, but after receiving the OTP and Blue Dart dispatch notice, I knew it was genuine. Got ₹50,000 cash for my brother earlier and now this flagship iPhone. Thank you from the bottom of my heart!
             </p>
             <div class="review-customer-images">
-              <img src="iphone review 5.webp" alt="Priya Patel setup photo" class="review-thumbnail-img" loading="lazy">
+              <img src="iphone review 5.webp" alt="Priya Patel setup photo" class="review-thumbnail-img" width="160" height="160" loading="lazy">
             </div>
             <div class="amazon-review-footer">
               <span class="helpful-count">142 people found this helpful</span>
@@ -492,7 +499,7 @@
               Took this photo showing the gorgeous titanium frame and display. Everything came sealed with original cable and Apple documentation. Definitely worth participating in this festive lucky wheel event!
             </p>
             <div class="review-customer-images">
-              <img src="iphone review 6.webp" alt="Sneha Reddy camera screen photo" class="review-thumbnail-img" loading="lazy">
+              <img src="iphone review 6.webp" alt="Sneha Reddy camera screen photo" class="review-thumbnail-img" width="160" height="160" loading="lazy">
             </div>
             <div class="amazon-review-footer">
               <span class="helpful-count">67 people found this helpful</span>
@@ -527,7 +534,7 @@
               Here is my delivery box package photo. Everything from claim code entry to doorstep delivery was handled with top-notch professionalism. Best lucky spin experience ever!
             </p>
             <div class="review-customer-images">
-              <img src="iphone review 7.webp" alt="Ananya Joshi delivery package photo" class="review-thumbnail-img" loading="lazy">
+              <img src="iphone review 7.webp" alt="Ananya Joshi delivery package photo" class="review-thumbnail-img" width="160" height="160" loading="lazy">
             </div>
             <div class="amazon-review-footer">
               <span class="helpful-count">53 people found this helpful</span>

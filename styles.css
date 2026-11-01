@@ -571,20 +571,21 @@ html, body {
    AMAZON STYLE CUSTOMER REVIEWS SECTION
    ========================================================================== */
 .reviews-section {
-  margin-top: 3.5rem;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
   padding: 1.5rem 0;
   width: 100%;
+  scroll-margin-top: calc(4.5rem + 1rem);
 }
 
 .reviews-header-block {
-  margin-bottom: 1.5rem;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 0.75rem;
 }
 
 .amazon-section-title {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
   font-weight: 900;
   color: #fff;
   letter-spacing: 0.02em;
@@ -593,26 +594,29 @@ html, body {
 .amazon-reviews-layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.25rem;
+  gap: clamp(1.5rem, 3.5vw, 2.5rem);
   align-items: start;
 }
 
 @media (min-width: 880px) {
   .amazon-reviews-layout {
-    grid-template-columns: 320px 1fr;
-    gap: 2.75rem;
+    grid-template-columns: clamp(290px, 30%, 340px) 1fr;
+    gap: clamp(1.75rem, 3vw, 2.75rem);
   }
 }
 
 /* --- Left Column: Summary Card & Histogram --- */
 .amazon-summary-col {
   width: 100%;
+  container-type: inline-size;
+  container-name: summary-col;
 }
 
 @media (min-width: 880px) {
   .amazon-summary-col {
     position: sticky;
-    top: 1.5rem;
+    top: calc(4.5rem + 1rem); /* Clear sticky .site-nav comfortably */
+    z-index: 20;
   }
 }
 
@@ -621,34 +625,73 @@ html, body {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   backdrop-filter: blur(16px);
-  padding: 1.5rem;
+  -webkit-backdrop-filter: blur(16px);
+  padding: clamp(1rem, 3vw, 1.5rem);
   box-shadow: var(--glass-shadow);
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
+.rating-overview-pane,
+.rating-actions-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.rating-pane-divider {
+  display: block;
+}
+
+.rating-pane-divider-vertical {
+  display: none;
+}
+
+/* Wide / Tablet Layout: When stacked with ample width (>= 520px) */
+@container summary-col (min-width: 520px) {
+  .overall-rating-card {
+    display: grid;
+    grid-template-columns: 1.15fr 1px 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .rating-pane-divider {
+    display: none;
+  }
+
+  .rating-pane-divider-vertical {
+    display: block;
+    width: 1px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
 .stars-aggregate {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+  flex-wrap: wrap;
 }
 
 .amazon-stars {
   color: #ffa41c;
-  font-size: 1.15rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.25rem);
   letter-spacing: 0.08em;
   text-shadow: 0 0 10px rgba(255, 164, 28, 0.4);
+  line-height: 1;
 }
 
 .rating-score-text {
-  font-size: 1.15rem;
+  font-size: clamp(1.05rem, 2.5vw, 1.2rem);
   font-weight: 800;
   color: #fff;
 }
 
 .total-ratings-count {
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 2vw, 0.85rem);
   color: var(--text-muted);
 }
 
@@ -658,25 +701,28 @@ html, body {
   flex-direction: column;
   gap: 0.55rem;
   margin-top: 0.25rem;
+  width: 100%;
 }
 
 .histogram-row {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  font-size: 0.82rem;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+  font-size: clamp(0.78rem, 2vw, 0.82rem);
 }
 
 .hist-label {
-  width: 42px;
+  width: clamp(38px, 10%, 44px);
   color: #60a5fa;
   font-weight: 600;
   flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .hist-bar-track {
   flex: 1;
-  height: 16px;
+  min-width: 0;
+  height: 14px;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 4px;
   overflow: hidden;
@@ -702,6 +748,7 @@ html, body {
   height: 1px;
   background: rgba(255, 255, 255, 0.1);
   margin: 0.25rem 0;
+  width: 100%;
 }
 
 /* Reviews with Images Strip */
@@ -712,7 +759,7 @@ html, body {
 }
 
 .gallery-title {
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
   font-weight: 800;
   color: #fff;
 }
@@ -721,39 +768,53 @@ html, body {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 6px;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
 }
 
 .amazon-image-strip::-webkit-scrollbar {
   height: 5px;
 }
 .amazon-image-strip::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 4px;
 }
 
 .strip-thumb {
-  width: 60px;
-  height: 60px;
-  border-radius: 6px;
+  width: clamp(56px, 14vw, 64px);
+  height: clamp(56px, 14vw, 64px);
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
   object-fit: cover;
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
   flex-shrink: 0;
+  scroll-snap-align: start;
   cursor: pointer;
-  transition: transform var(--transition-fast), border-color var(--transition-fast);
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.strip-thumb:hover {
+.strip-thumb:hover,
+.strip-thumb:focus-visible {
   transform: scale(1.08);
   border-color: #ffa41c;
   box-shadow: 0 4px 12px rgba(255, 164, 28, 0.4);
+  outline: none;
 }
 
 .see-all-images-link {
-  font-size: 0.82rem;
+  font-size: clamp(0.8rem, 2vw, 0.85rem);
   color: #60a5fa;
   text-decoration: none;
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0;
+  width: fit-content;
 }
 
 .see-all-images-link:hover {
@@ -769,32 +830,37 @@ html, body {
 }
 
 .write-review-heading {
-  font-size: 1.05rem;
+  font-size: clamp(0.98rem, 2.5vw, 1.08rem);
   font-weight: 800;
   color: #fff;
 }
 
 .write-review-sub {
-  font-size: 0.82rem;
+  font-size: clamp(0.8rem, 2vw, 0.85rem);
   color: var(--text-secondary);
   line-height: 1.45;
 }
 
 .amazon-write-btn {
   width: 100%;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.65rem 1rem;
   border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.28);
   color: #fff;
   font-family: var(--font-main);
-  font-size: 0.88rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   transition: all var(--transition-fast);
   margin-top: 0.35rem;
   text-align: center;
+  touch-action: manipulation;
 }
 
 .amazon-write-btn:hover {
@@ -811,7 +877,8 @@ html, body {
   border: 1.5px solid var(--gold-400);
   border-radius: var(--radius-lg);
   backdrop-filter: blur(16px);
-  padding: 1.35rem;
+  -webkit-backdrop-filter: blur(16px);
+  padding: clamp(1rem, 3.5vw, 1.35rem);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 20px var(--gold-glow);
   animation: slideDownForm 0.25s ease-out;
 }
@@ -840,7 +907,7 @@ html, body {
 }
 
 .form-title {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
   font-weight: 800;
   color: #fff;
 }
@@ -849,10 +916,16 @@ html, body {
   background: none;
   border: none;
   color: var(--text-muted);
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   cursor: pointer;
-  padding: 2px 6px;
+  padding: 6px 10px;
+  min-width: 36px;
+  min-height: 36px;
   border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
 }
 .close-form-btn:hover {
   color: #fff;
@@ -866,25 +939,32 @@ html, body {
 }
 
 .form-label {
-  font-size: 0.82rem;
+  font-size: clamp(0.78rem, 2vw, 0.84rem);
   font-weight: 700;
   color: var(--text-secondary);
 }
 
 .interactive-star-picker {
   display: flex;
-  gap: 4px;
+  gap: 6px;
+  align-items: center;
 }
 
 .star-pick-btn {
   background: none;
   border: none;
-  font-size: 1.6rem;
+  font-size: 1.75rem;
   color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  padding: 0 2px;
+  padding: 4px;
+  min-width: 38px;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
   transition: transform 0.1s ease, color 0.1s ease;
+  touch-action: manipulation;
 }
 
 .star-pick-btn.selected,
@@ -902,8 +982,8 @@ html, body {
   border-radius: var(--radius-sm);
   color: #fff;
   font-family: var(--font-main);
-  font-size: 0.88rem;
-  padding: 0.55rem 0.75rem;
+  font-size: 1rem; /* 16px to prevent iOS Safari auto-zoom on focus */
+  padding: 0.6rem 0.75rem;
   outline: none;
   transition: border-color var(--transition-fast);
 }
@@ -915,9 +995,10 @@ html, body {
 }
 
 .form-file-input {
-  font-size: 0.8rem;
+  font-size: clamp(0.78rem, 2vw, 0.84rem);
   color: var(--text-secondary);
   cursor: pointer;
+  max-width: 100%;
 }
 
 .photo-preview-wrap {
@@ -925,6 +1006,7 @@ html, body {
   align-items: center;
   gap: 0.75rem;
   margin-top: 0.4rem;
+  flex-wrap: wrap;
 }
 
 .preview-thumb {
@@ -941,18 +1023,23 @@ html, body {
   color: #f87171;
   font-size: 0.75rem;
   border-radius: 4px;
-  padding: 0.25rem 0.55rem;
+  padding: 0.35rem 0.65rem;
+  min-height: 34px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
 }
 
 .form-actions-row {
   display: flex;
   gap: 0.65rem;
   margin-top: 0.35rem;
+  flex-wrap: wrap;
 }
 
 .amazon-submit-review-btn {
-  flex: 1;
+  flex: 1 1 160px;
+  min-height: 44px;
   background: linear-gradient(135deg, #ffd814 0%, #f7ca00 100%);
   border: 1px solid #fcd200;
   border-radius: var(--radius-sm);
@@ -964,6 +1051,11 @@ html, body {
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(213, 217, 217, 0.2);
   transition: filter var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  touch-action: manipulation;
 }
 
 .amazon-submit-review-btn:hover {
@@ -971,7 +1063,9 @@ html, body {
 }
 
 .amazon-cancel-review-btn {
-  padding: 0.6rem 1rem;
+  flex: 0 1 auto;
+  min-height: 44px;
+  padding: 0.6rem 1.15rem;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-sm);
@@ -979,6 +1073,10 @@ html, body {
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
 }
 
 .form-temp-note {
@@ -992,30 +1090,35 @@ html, body {
 .reviews-feed-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
 }
 
 .reviews-pagination-row {
   display: flex;
   justify-content: center;
   margin-top: 1.5rem;
+  width: 100%;
 }
 
 .amazon-view-all-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 2rem;
+  min-height: 46px;
   border-radius: var(--radius-full);
   background: var(--glass-bg);
   border: 1.5px solid var(--gold-400);
   color: #fff;
   font-family: var(--font-main);
-  font-size: 0.95rem;
+  font-size: clamp(0.88rem, 2vw, 0.95rem);
   font-weight: 800;
   cursor: pointer;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 14px var(--gold-glow);
   transition: all var(--transition-fast);
+  text-align: center;
+  touch-action: manipulation;
 }
 
 .amazon-view-all-btn:hover {
@@ -1039,26 +1142,32 @@ html, body {
 .amazon-feed-col {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  width: 100%;
+  min-width: 0; /* Prevents overflow in grid child */
+  scroll-margin-top: calc(4.5rem + 1rem);
 }
 
 .feed-header-row {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding-bottom: 0.65rem;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
 }
 
 .feed-heading {
-  font-size: 1.2rem;
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
   font-weight: 800;
   color: #fff;
 }
 
 .sort-by-text {
-  font-size: 0.8rem;
+  font-size: clamp(0.75rem, 2vw, 0.82rem);
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
 /* Individual Amazon Review Item */
@@ -1067,11 +1176,14 @@ html, body {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   backdrop-filter: blur(14px);
-  padding: 1.5rem;
+  -webkit-backdrop-filter: blur(14px);
+  padding: clamp(1rem, 3.5vw, 1.5rem);
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
   transition: border-color var(--transition-fast), transform var(--transition-fast);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .amazon-review-item:hover {
@@ -1096,32 +1208,35 @@ html, body {
 }
 
 .amazon-user-name {
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 2.5vw, 0.96rem);
   font-weight: 700;
   color: #fff;
 }
 
 .amazon-rating-row {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  align-items: baseline;
+  gap: 0.5rem 0.75rem;
   flex-wrap: wrap;
 }
 
 .amazon-review-headline {
-  font-size: 0.98rem;
+  font-size: clamp(0.92rem, 2.5vw, 1rem);
   font-weight: 800;
   color: #fff;
   line-height: 1.35;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .amazon-meta-row {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.35rem 0.75rem;
   flex-wrap: wrap;
-  font-size: 0.78rem;
+  font-size: clamp(0.74rem, 2vw, 0.78rem);
   color: var(--text-muted);
+  line-height: 1.4;
 }
 
 .review-variant {
@@ -1135,35 +1250,41 @@ html, body {
 }
 
 .amazon-review-body {
-  font-size: 0.92rem;
+  font-size: clamp(0.88rem, 2vw, 0.94rem);
   line-height: 1.6;
   color: var(--text-secondary);
   margin-top: 0.2rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* Attached Customer Images */
 .review-customer-images {
   margin: 0.4rem 0;
   display: flex;
-  gap: 0.75rem;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
   flex-wrap: wrap;
 }
 
 .review-thumbnail-img {
-  max-width: 175px;
-  max-height: 175px;
+  width: clamp(100px, 28vw, 160px);
+  height: clamp(100px, 28vw, 160px);
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
   cursor: pointer;
+  flex-shrink: 0;
   transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.review-thumbnail-img:hover {
+.review-thumbnail-img:hover,
+.review-thumbnail-img:focus-visible {
   transform: scale(1.04);
   border-color: #ffa41c;
   box-shadow: 0 6px 20px rgba(255, 164, 28, 0.35);
+  outline: none;
 }
 
 /* Amazon Review Footer: Helpful & Report */
@@ -1175,11 +1296,11 @@ html, body {
   padding-top: 0.65rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.65rem;
 }
 
 .helpful-count {
-  font-size: 0.78rem;
+  font-size: clamp(0.74rem, 2vw, 0.78rem);
   color: var(--text-muted);
 }
 
@@ -1195,12 +1316,17 @@ html, body {
   border-radius: var(--radius-sm);
   color: #fff;
   font-family: var(--font-main);
-  font-size: 0.8rem;
+  font-size: clamp(0.78rem, 2vw, 0.82rem);
   font-weight: 600;
-  padding: 0.32rem 1.15rem;
+  padding: 0.38rem 1.15rem;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
   transition: all var(--transition-fast);
+  touch-action: manipulation;
 }
 
 .amazon-helpful-btn:hover {
@@ -1218,8 +1344,13 @@ html, body {
   background: none;
   border: none;
   color: var(--text-muted);
-  font-size: 0.78rem;
+  font-size: clamp(0.76rem, 2vw, 0.8rem);
+  padding: 0.38rem 0.5rem;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .amazon-report-btn:hover {
@@ -2340,10 +2471,23 @@ dialog::backdrop {
   }
   .amazon-reviews-layout {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
-  .review-thumbnail-img {
-    max-width: 140px;
-    max-height: 140px;
+  .form-actions-row {
+    flex-direction: column;
+  }
+  .amazon-submit-review-btn,
+  .amazon-cancel-review-btn {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+  .amazon-view-all-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+  .interactive-star-picker {
+    justify-content: space-between;
+    max-width: 260px;
   }
 }
 

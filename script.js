@@ -1340,7 +1340,7 @@
       if (rev.photo) {
         imageHtml = `
           <div class="review-customer-images">
-            <img src="${rev.photo}" alt="User uploaded review photo" class="review-thumbnail-img" loading="lazy">
+            <img src="${rev.photo}" alt="User uploaded review photo" class="review-thumbnail-img" width="160" height="160" loading="lazy">
           </div>
         `;
       }
