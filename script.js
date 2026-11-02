@@ -649,19 +649,19 @@
 
   /**
    * Determine winning prize based on weighted probability in normal gameplay:
-   * Grand prizes (iPhone & ₹50K) are exciting top-tier wins!
+   * Grand prizes (iPhone & ₹50K) are boosted for higher win rates!
    */
   function pickRandomPrizeIndex() {
     // Weights for 8 slices (total = 100)
-    // 0: iPhone 18 Pro Max -> 1% (Rare Legendary)
-    // 1: ₹50,000 Cash      -> 2% (Mega Jackpot)
-    // 2: Better Luck       -> 22%
-    // 3: ₹5 Cash           -> 25% (Common delight)
-    // 4: AirPods Pro Max   -> 4%  (Exciting reward)
-    // 5: ₹500 Voucher      -> 16%
-    // 6: ₹1,000 Gift Card  -> 10%
-    // 7: ₹50 Cashback      -> 20%
-    const weights = [1, 2, 22, 25, 4, 16, 10, 20];
+    // 0: iPhone 18 Pro Max -> 35% (Boosted Grand Prize #1)
+    // 1: ₹50,000 Cash      -> 35% (Boosted Grand Prize #2)
+    // 2: Better Luck       -> 5%
+    // 3: ₹5 Cash           -> 5%
+    // 4: AirPods Pro Max   -> 6%
+    // 5: ₹500 Voucher      -> 4%
+    // 6: ₹1,000 Gift Card  -> 5%
+    // 7: ₹50 Cashback      -> 5%
+    const weights = [35, 35, 5, 5, 6, 4, 5, 5];
     const totalWeight = weights.reduce((a, b) => a + b, 0);
     let rand = Math.random() * totalWeight;
 
@@ -669,7 +669,7 @@
       if (rand < weights[i]) return i;
       rand -= weights[i];
     }
-    return 3; // Fallback to ₹5
+    return 0; // Fallback to iPhone 18 Pro Max
   }
 
   // ==========================================================================
